@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CodWeb Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+    <link rel="icon" href="/public/imgs/coding.png" />
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light">
+            <span id="open-nav" style="font-size:30px;cursor:pointer">
+                &#9776;
+            </span>
+            <a class="navbar-brand title" href="#">CodWeb</a>
+            
+            <form class="form-inline">
+                <div class="input-group">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search" />
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-primary" type="submit" id="search-button">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+            </form>
+          </nav>
+        <div class="row">
+            <div id="mySidenav" class="sidenav">
+                <a class="close-btn">&times;</a>
+                <a href="#" id="home-btn">Home</a>
+                <a href="#" id="explore-btn">Explore</a>
+                <a href="#" id="messages-btn">Messages</a>
+                <a href="#" id="post-btn">Post</a>
+                <a href="#" id="profile-btn">Profile</a>
+                <a href="#" id="settings-btn">Settings</a>
+                <a href="/public/login.html" id="log-out-btn">Log Out</a>
+            </div>
+            <div class="col-lg-8 col-md-8" style="text-align: center;"> <br />
+                <div class="side-navs" id="dashboard">This is the dashboard section</div>
+                <div class="side-navs" id="explore">This is the explore section</div>
+                <div class="side-navs" id="messages">This is the messages section</div>
+                <div class="side-navs" id="post">This is the post section</div>
+                <div class="side-navs" id="profile">This is the profile section</div>
+                <div class="side-navs" id="settings">This is the settings section</div>
+            </div>
+            <div class="col-lg-4 col-md-4" style="text-align: center;"> <br />
+                <img id="coding-image" src="/public/imgs/coding.png">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/script.js"></script>
+</body>
+
+</html>
