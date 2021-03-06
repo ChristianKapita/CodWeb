@@ -10,15 +10,15 @@ $(function () {
     });
 
     // Submit login
-    $("#login").click(function (e) {
-        e.preventDefault();
-        location.href = "/public/dashboard.html";
-    });
-    // Submit sign-up
-    $("#sign-up").click(function (e) {
-        e.preventDefault();
-        location.href = "/public/dashboard.html";
-    });
+    // $("#login").click(function (e) {
+    //     e.preventDefault();
+    //     location.href = "/public/dashboard.html";
+    // });
+    // // Submit sign-up
+    // $("#sign-up").click(function (e) {
+    //     e.preventDefault();
+    //     location.href = "/public/dashboard.html";
+    // });
     
     // Hide/Show navigation tab on user click in dashboard
     $("#open-nav").click(function () {
