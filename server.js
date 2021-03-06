@@ -1,36 +1,40 @@
-// Requiring necessary npm packages
 const express = require("express");
-const session = require("express-session");
-// Requiring passport as we've configured it
-const passport = require("./config/passport");
-
-// Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8080;
+const bodyParse = require("body-parser");
+const cors = require("cors");
 const db = require("./models");
+const path = require("path");
 
-// Creating express app and configuring middleware needed for authentication
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
-// We need to use sessions to keep track of our user's login status
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "public")));
+
+const exphbs = require("express-handlebars");
+app.set("view engine", "handlebars");
+app.engine(
+  "handlebars",
+  exphbs({ extname: "handlebars", defaultLayout: "", layoutsDir: "" })
 );
-app.use(passport.initialize());
-app.use(passport.session());
 
-// Requiring our routes
-require("./routes/html-routes.js")(app);
-require("./routes/api-routes.js")(app);
+const corsOptions = {
+  origin: "http://localhost:8081"
+};
 
-// Syncing our database and logging a message to the user upon success
+app.use(cors(corsOptions));
+
+app.use(bodyParse.json());
+
+// app.get("/", (req, res) => {
+//   //res.json({ message: "welcome to CodWeb App" });
+//   res.sendFile(path.join(__dirname, "../public/login.html"));
+// });
+
+const PORT = process.env.PORT || 8080;
+require("./routes/auth-routes")(app);
+require("./routes/html-routes")(app);
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+    console.log(`server is running on port ${PORT}`);
   });
 });
