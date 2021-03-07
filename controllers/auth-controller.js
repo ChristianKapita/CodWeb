@@ -15,12 +15,12 @@ exports.signin = (req, res) => {
       if (!user) {
         return res
           .status(404)
-          .render("login", { message: "Username or password is incorret" });
+          .render("login", { message: "Username or password is incorrect" });
       }
 
       if (req.body.password.trim() !== user.password) {
         return res.status(401).render("login", {
-          message: "Username or password is incorret"
+          message: "Username or password is incorrect"
         });
       }
       const token = jwt.sign({ id: user.id }, config.secret, {

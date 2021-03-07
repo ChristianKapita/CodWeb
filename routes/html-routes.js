@@ -2,13 +2,16 @@
 //const path = require("path");
 
 //for Handlebars
-module.exports = function(app) {
+module.exports = function (app) {
   app.get("/", (req, res) => {
     //res.sendFile(path.join(__dirname, "../public/login.html"));
     res.render("login");
   });
   app.get("/dashboard", (req, res) => {
     res.render("dashboard");
+  });
+  app.get("/sign-up", (req, res) => {
+    res.render("sign-up");
   });
 };
 

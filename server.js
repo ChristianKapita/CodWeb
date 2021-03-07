@@ -14,7 +14,7 @@ const exphbs = require("express-handlebars");
 app.set("view engine", "handlebars");
 app.engine(
   "handlebars",
-  exphbs({ extname: "handlebars", defaultLayout: "", layoutsDir: "" })
+  exphbs({ extname: "handlebars", defaultLayout: "main" })
 );
 
 const corsOptions = {
