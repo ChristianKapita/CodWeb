@@ -24,12 +24,18 @@
                             <div class="col form-group">
                                 <h4>Username: </h4>
                                 <input type="text" class="form-control" id="username" name="username" placeholder="ex. JohnSmith1234">
+                                {{#if message}}
+                <h6 class="alert alert-danger mt-4">{{message}}</h6>
+                {{/if}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
                                 <h4>Email Address: </h4>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="johnsmith@example.com">
+                                {{#if message}}
+                <h6 class="alert alert-danger mt-4">{{message}}</h6>
+                {{/if}}
                             </div>
                         </div>
                         <div class="row">
