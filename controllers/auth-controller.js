@@ -25,6 +25,11 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
+  if (!req.body.username || !req.body.password) {
+    return res
+      .status(404)
+      .render("login", { message: "Please entrer your username and password" });
+  }
   User.findOne({
     where: {
       username: req.body.username
