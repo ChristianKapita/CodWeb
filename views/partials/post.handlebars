@@ -1,0 +1,33 @@
+<nav style="text-align: left;">
+    <h1>Post</h1>
+    <ul class="nav justify-content-end">
+        <li>
+            {{!-- User's profile picture --}}
+            <img src="/public/imgs/google.png" alt="img" class="rounded-circle profile-picture">
+        </li>
+        <li class="nav-item">
+            <h2>Big Google</h2>
+            <a href="#" class="username">@TheRealGoogle</a>
+        </li>
+    </ul>
+</nav>
+<br />
+
+<form style="text-align: left;">
+    <div id="textarea" contentEditable="true"></div><br />
+    <button type="button" class="btn btn-outline-primary">
+        <i class="fas fa-images"></i>
+    </button>
+    <button type="button" class="btn btn-outline-primary boldText" value="Bold">
+        <i class="fas fa-bold"></i>
+    </button>
+    <button type="button" class="btn btn-outline-primary italicText" value="Italic">
+        <i class="fas fa-italic"></i>
+    </button>
+    <button type="button" class="btn btn-outline-primary underlineText" value="Underline">
+        <i class="fas fa-underline"></i>
+    </button>
+    <button type="button" class="btn btn-outline-success" id="submit-post">
+        <i class="fas fa-check-double"></i> POST
+    </button>
+</form>
