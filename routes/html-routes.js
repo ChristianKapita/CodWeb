@@ -2,7 +2,7 @@
 //const path = require("path");
 
 //for Handlebars
-module.exports = function (app) {
+module.exports = function(app) {
   app.get("/", (req, res) => {
     //res.sendFile(path.join(__dirname, "../public/login.html"));
     res.render("login");
@@ -14,16 +14,3 @@ module.exports = function (app) {
     res.render("sign-up");
   });
 };
-
-//for HMTL
-// const path = require("path");
-
-// module.exports = function(app) {
-//   app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../public/login.html"));
-//     //res.render("login");
-//   });
-//   app.get("/dashbo", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../public/dashboard.html"));
-//   });
-// };

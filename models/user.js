@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Mobile: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true
+      unique: false
     },
     email: {
       type: DataTypes.STRING,
@@ -28,6 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: true
       }
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    isBlocked: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    Role: {
+      type: DataTypes.STRING,
+      defaultValue: "Membre"
     }
   });
   return User;
