@@ -8,34 +8,40 @@
                 <div style="text-align: center;">
                     <h1>Create your CodWeb Account</h1> <br />
                 </div>
-                <form class="sign-up">
+                <form action="/api/auth/signup" method="POST" class="sign-up">
                     <div class="form-group">
                         <div class="row">
                             <div class="col form-group">
                                 <h4>First Name: </h4>
-                                <input type="text" class="form-control" id="first-name" placeholder="ex. John">
+                                <input type="text" class="form-control" id="first-name" name="firstName" placeholder="ex. John">
                             </div>
                             <div class="col form-group">
                                 <h4>Last Name: </h4>
-                                <input type="text" class="form-control" id="last-name" placeholder="ex. Smith">
+                                <input type="text" class="form-control" id="last-name" name="lastName" placeholder="ex. Smith">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
                                 <h4>Username: </h4>
-                                <input type="text" class="form-control" id="username" placeholder="ex. JohnSmith1234">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="ex. JohnSmith1234">
+                                {{#if message}}
+                <h6 class="alert alert-danger mt-4">{{message}}</h6>
+                {{/if}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
                                 <h4>Email Address: </h4>
-                                <input type="email" class="form-control" id="email" placeholder="johnsmith@example.com">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="johnsmith@example.com">
+                                {{#if message}}
+                <h6 class="alert alert-danger mt-4">{{message}}</h6>
+                {{/if}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col form-group">
                                 <h4>Create Password: </h4>
-                                <input type="password" class="form-control" id="password" placeholder="Your Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Your Password">
                             </div>
                             <div class="col form-group">
                                 <h4>Confirm Password: </h4>
@@ -46,13 +52,13 @@
                         <div class="row">
                             <div class="col form-group">
                                 <h4>Country: </h4>
-                                <select class="form-control" id="country">
+                                <select class="form-control" id="country" name="Country">
                                     <option value=""></option>
                                 </select>
                             </div>
                             <div class="col form-group">
                                 <h4>Mobile Number: </h4>
-                                <input type="text" class="form-control" id="mobile" placeholder="(555)-555-5555">
+                                <input type="text" class="form-control" id="mobile" name="Mobile" placeholder="(555)-555-5555">
                             </div>
                         </div>
                     </div>
