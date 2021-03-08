@@ -14,9 +14,13 @@ $(() => {
   $("#log-out-btn").click(() => {
     location.href = "/";
   });
-  // Submit sign-up
+  // Go to sign-up
   $("#sign-up").click(() => {
     location.href = "/sign-up";
+  });
+  // Submit sign-up (requires validation)
+  $("#sign-up-submit").click(() => {
+    location.href = "/dashboard";
   });
   // Return to login page
   $("#login").click(() => {
@@ -61,7 +65,7 @@ $(() => {
     $(".side-navs").hide(500);
     $("#settings").show(500);
   });
-  // 
+  // Bold, Italic, Underline text
   $(".boldText").click(() => {
     $("#textarea").toggleClass("bold");
   });

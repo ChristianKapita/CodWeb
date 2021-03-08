@@ -17,7 +17,9 @@ exports.signup = (req, res) => {
     email: req.body.email
   })
     .then(() => {
-      res.send({ message: "User was registered successfully!" });
+      res.render("login", {
+        feedback: "Successfully registered. Please login to continue. "
+      });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -28,7 +30,7 @@ exports.signin = (req, res) => {
   if (!req.body.username || !req.body.password) {
     return res
       .status(404)
-      .render("login", { message: "Please entrer your username and password" });
+      .render("login", { message: "Please enter a username and password" });
   }
   User.findOne({
     where: {
@@ -39,7 +41,7 @@ exports.signin = (req, res) => {
       if (!user) {
         return res
           .status(404)
-          .render("login", { message: "Username or password is incorret" });
+          .render("login", { message: "Username or password is incorrect" });
       }
       const passwordIsValid = bcrypt.compareSync(
         req.body.password,
@@ -47,7 +49,7 @@ exports.signin = (req, res) => {
       );
       if (!passwordIsValid) {
         return res.status(401).render("login", {
-          message: "Username or password is incorret"
+          message: "Username or password is incorrect"
         });
       }
       const token = jwt.sign({ id: user.id }, config.secret, {
