@@ -101,7 +101,7 @@ html, body {
   .username {
       font-size: large;
   }
-  code {
+code {
     background-color: #eee;
     border-radius: 3px;
     font-family: courier, monospace;
