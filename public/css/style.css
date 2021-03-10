@@ -1,18 +1,18 @@
 html, body {
     height: 100%;
-    background-color: rgb(243, 240, 240);
 }
 .title {
     font-size: 72px;
     font-weight: 900;
 }
+.navbar .title {
+    text-align: left !important;
+    position: relative;
+}
 @media only screen and (max-width: 767px) {
     .title {
         font-size: 15vw;
         font-weight: 900;
-    }
-    #search-form {
-        margin-left: 25%;
     }
 }
 #coding-image {
@@ -51,7 +51,7 @@ html, body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #000000;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -125,7 +125,7 @@ textarea {
 }
 #textarea {
     width: 100%;
-    height: 150px;
+    height: 20vh;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -133,6 +133,7 @@ textarea {
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
+    overflow: scroll;
 }
 .bold {
     font-weight: bold;
@@ -143,3 +144,36 @@ textarea {
 .underline {
    text-decoration: underline;
   }
+
+#settings-list {
+    text-align: left;
+}
+  .list-group .list-group-item{
+      display: inline-block;
+      font-size: 20px;
+      border-color: lightgray;
+  }
+  .custom-switch {
+    display: inline-block;
+    float: right;
+}
+.list-cursor:hover {
+    cursor: pointer;
+}
+.red {
+    color: red;
+}
+.dark {
+    background-color: #181a1b !important;
+    color: white !important;
+}
+.light {
+    background-color: white !important;
+    color: black !important;
+}
+#subtitle {
+    float: left;
+}
+#search-form {
+    float: right;
+}

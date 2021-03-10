@@ -1,20 +1,13 @@
 <nav style="text-align: left;">
-    <h1>Post</h1>
-    <ul class="nav justify-content-end">
-        <li>
-            {{!-- User's profile picture --}}
-            <img src="/public/imgs/google.png" alt="img" class="rounded-circle profile-picture">
-        </li>
-        <li class="nav-item">
-            <h2>Big Google</h2>
-            <a href="#" class="username">@TheRealGoogle</a>
-        </li>
-    </ul>
+    <h1>Post
+        <i class="fas fa-cloud-upload-alt"></i>
+    </h1>
 </nav>
 <br />
 
 <form style="text-align: left;">
-    <div id="textarea" contentEditable="true"></div><br />
+    <div id="textarea" contentEditable="true" class="bg-transparent" max="400"></div>
+    <small>Maximum 400 characters!</small> <br />
     <button type="button" class="btn btn-outline-primary">
         <i class="fas fa-images"></i>
     </button>

@@ -1,23 +1,17 @@
 <div class="container">
-    <nav class="navbar navbar-light">
+    <nav class="navbar">
         <span id="open-nav" style="font-size:30px;cursor:pointer">
             &#9776;
         </span>
-        <a class="navbar-brand title" href="#">CodWeb</a>
-
-        <form class="form-inline" id="search-form">
-            <div class="input-group">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search" />
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit" id="search-button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+        <h1 class="title">CodWeb</h1>
+        {{!-- Ghost navbar elements --}}
+        <form class="form-inline"></form>
+        <form class="form-inline"></form>
     </nav>
     <div class="row">
         <div id="mySidenav" class="sidenav">
+            <h5 style="text-align: center; color: white">Signed in as </h5>
+            <h4 style="text-align: center; color: white; font-weight: 900" id="username">Matthew Guillen</h4>
             <a class="close-btn">⤆</a>
             <a href="#" id="home-btn">Home</a>
             <a href="#" id="explore-btn">Explore</a>
@@ -36,7 +30,8 @@
             <div class="side-navs" id="settings">{{> settings }}</div>
         </div>
         <div class="col-lg-4 col-md-4" style="text-align: center;"> <br />
-            <img id="coding-image" src="/public/imgs/coding.png">
+            <img id="coding-image" src="/public/imgs/coding.png"> <br /> <br />
+            <span id="apiquotes"></span>
         </div>
     </div>
 </div>
