@@ -35,6 +35,8 @@ $(() => {
   // Hide all and only show dashboard upon page load
   $(".side-navs").hide();
   $("#dashboard").show();
+  $("#change-password-form").hide();
+  $("#delete-account-form").hide();
   // Hide all and only show user selection
   // 250 timer for smooth animation
   $("#home-btn").click(() => {
@@ -120,10 +122,22 @@ $(() => {
       light();
     }
   });
-  // Change password
-  // $("#change-password").click(() => {
-
-  // });
+  // Change Password
+  $("#change-password").click(() => {
+    $("#change-password-form").show(250);
+    $("#delete-account-form").hide(250);
+  });
+  $("#close-password-btn").click(() => {
+    $("#change-password-form").hide(250);
+  });
+  // Delete Account
+  $("#delete-account").click(() => {
+    $("#delete-account-form").show(250);
+    $("#change-password-form").hide(250);
+  });
+  $("#close-delete-btn").click(() => {
+    $("#delete-account-form").hide(250);
+  });
   // Random quotes API
   $.getJSON("https://api.quotable.io/random", (data) => {
     $("#apiquotes").html(

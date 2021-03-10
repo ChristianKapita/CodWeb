@@ -84,22 +84,22 @@ html, body {
     border-width: medium;
     border-radius: 5px;
   }
-  .block img {
+.block img {
     width: 75px;
     height: 75px;
     float: left;
     margin: 0 1rem 0 0;
   }
-  .block h2 {
+.block h2 {
     font-weight: 500;
     margin: 0 0 0.5rem 0;
   }
-  .close-btn {
+.close-btn {
     cursor: pointer;
     font-size: 72px;
   }
-  .username {
-      font-size: large;
+.username {
+    font-size: large;
   }
 code {
     background-color: #eee;
@@ -148,12 +148,12 @@ textarea {
 #settings-list {
     text-align: left;
 }
-  .list-group .list-group-item{
-      display: inline-block;
-      font-size: 20px;
-      border-color: lightgray;
-  }
-  .custom-switch {
+.list-group .list-group-item{
+    display: inline-block;
+    font-size: 20px;
+    border-color: lightgray;
+}
+.custom-switch {
     display: inline-block;
     float: right;
 }
