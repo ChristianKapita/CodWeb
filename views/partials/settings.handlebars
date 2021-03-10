@@ -1,1 +1,28 @@
-This is the settings section
+<div style="text-align: start">
+    <h1>Settings
+        <i class="fas fa-cogs"></i>
+    </h1>
+    <br />
+</div>
+<div id="settings-list">
+    <ul class="card list-group bg-transparent" style="width: 100%">
+        <li class="list-group-item bg-transparent">Dark Theme 
+            <i class="far fa-moon"></i>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input list-cursor" id="theme-switch">
+                <label class="custom-control-label list-cursor" for="theme-switch"></label>
+            </div>
+        </li>
+        <li class="list-group-item list-cursor bg-transparent" id="change-password" data-toggle="collapse" data-target="#password-list" data-parent="#settings-list">
+            Change your password <i class="fas fa-key"></i>
+            <div class="list-group-collapse collapse" id="password-list" >
+                <a class="list-group-item" href="#">List Item 1</a>
+                <a class="list-group-item" href="#">list Item 2</a>
+            </div>
+        </li>
+        <li class="list-group-item list-cursor red bg-transparent" id="delete-account">Delete your account 
+            <i class="fas fa-trash"></i>
+        </li>
+    </ul>
+</div>
+<br /> <br /> <br /> <br />
