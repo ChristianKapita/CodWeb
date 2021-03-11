@@ -6,10 +6,11 @@
 <br />
 
 <form action="/api/auth/post" method="POST" style="text-align: left;">
+{{!-- <form style="text-align: left;"> --}}
     <div type="text" id="userid" name="userID">{{userData.userID}}</div>
     <div id="textarea" contentEditable="true" class="bg-transparent" name="content" max="400">This is test</div>
     <small>Maximum 400 characters!</small> <br />
-    <button type="button" class="btn btn-outline-primary">
+    <button id="imgbtn" type="button" class="btn btn-outline-primary">
         <i class="fas fa-images"></i>
     </button>
     <button type="button" class="btn btn-outline-primary boldText" value="Bold">
@@ -21,7 +22,7 @@
     <button type="button" class="btn btn-outline-primary underlineText" value="Underline">
         <i class="fas fa-underline"></i>
     </button>
-    <button type="submit" class="btn btn-outline-success" id="submit-post">
+    <button type="submit" id="post" class="btn btn-outline-success" id="submit-post">
         <i class="fas fa-check-double"></i> POST
     </button>
     {{#if feedbackPost}}

@@ -22,8 +22,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use(bodyParse.urlencoded({ extended: true }));
 app.use(bodyParse.json());
+app.use(bodyParse.text());
 
 // app.get("/", (req, res) => {
 //   //res.json({ message: "welcome to CodWeb App" });

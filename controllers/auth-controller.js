@@ -78,14 +78,16 @@ exports.post = (req, res) => {
   // if (!req.body.content) {
   //   return res.status(404).send("Please add content for post!!!!");
   // }
-  // Post.create({
-  //   content: req.body.content,
-  //   UserId: req.body.userID
-  Post.create(req.body)
+  Post.create({
+    content: req.text.content,
+    UserId: req.text.userId
+    //Post.create(req.body)
+  })
     .then(() => {
-      res.render("post.handlebars", {
-        feedbackPost: "Successfully Posted."
-      });
+      // res.render("post.handlebars", {
+      //   feedbackPost: "Successfully Posted."
+      // });
+      res.send({ message: "Successfully Posted" });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });

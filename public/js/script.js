@@ -211,3 +211,16 @@ $(() => {
     });
   }
 });
+$("#post").click(() => {
+  // const test=$("#textarea").text();
+  // const test2=$("#userid").text();
+  //alert(test2 + " " + test);
+  //const postData={ UserId: test2, content: test };
+  $.ajax("/api/auth/post", {
+    type: "POST",
+    //data: postData
+  }).then(() =>{
+    //location.reload();
+    console.log("Test");
+  });
+});
