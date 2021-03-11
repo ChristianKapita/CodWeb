@@ -1,6 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.User;
+const Post = db.Post;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -55,8 +56,36 @@ exports.signin = (req, res) => {
       const token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
-      res.status(200).redirect("/dashboard");
+      //res.status(200).send(user);
+      res.status(200).render("dashboard", {
+        userData: {
+          firstname: user.firstName,
+          lastName: user.lastName,
+          username: user.username,
+          userID: user.id,
+          country: user.Country,
+          mobile: user.Mobile,
+          email: user.email
+        }
+      });
       console.log(token);
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+exports.post = (req, res) => {
+  // if (!req.body.content) {
+  //   return res.status(404).send("Please add content for post!!!!");
+  // }
+  // Post.create({
+  //   content: req.body.content,
+  //   UserId: req.body.userID
+  Post.create(req.body)
+    .then(() => {
+      res.render("post.handlebars", {
+        feedbackPost: "Successfully Posted."
+      });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });

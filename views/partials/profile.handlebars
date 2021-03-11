@@ -11,13 +11,13 @@
             Edit Profile
         </button>
     </nav>
-    <h2>Big Google <a href="#" class="username">@TheRealGoogle</a> </h2>
+    <h2>{{userData.lastName}} {{userData.firstname}} <a href="#" class="username">{{userData.username}}</a> </h2>
 
     {{!-- Needs bio and country email phone number info --}}
     <h6 id="bio">About: Hi I'm google. I do code. Thats all. </h6>
-    <h6 id="location">Location: Canada</h6>
-    <h6 id="phone-number">Phone Number: 647-123-4567</h6>
-    <h6 id="email">Email: google@gmail.com</h6>
+    <h6 id="location">Location: {{userData.country}}</h6>
+    <h6 id="phone-number">Phone Number: {{userData.mobile}}</h6>
+    <h6 id="email">Email: {{userData.email}}</h6>
 </div>
 
 <h3>Your Posts</h3>
