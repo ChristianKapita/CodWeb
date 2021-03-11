@@ -1,6 +1,6 @@
 <div class="container">
     <nav class="navbar">
-        <span id="open-nav" style="font-size:30px;cursor:pointer">
+        <span id="open-nav" style="font-size:30px;cursor:pointer;user-select:none;">
             &#9776;
         </span>
         <h1 class="title">CodWeb</h1>
@@ -9,7 +9,7 @@
         <form class="form-inline"></form>
     </nav>
     <div class="row">
-        <div id="mySidenav" class="sidenav">
+        <div id="mySidenav" class="sidenav" style="user-select: none;">
             <h5 style="text-align: center; color: white">Signed in as </h5>
             <h4 style="text-align: center; color: white; font-weight: 900" id="username">{{userData.lastName}} {{userData.firstname}}</h4>
             <a class="close-btn">⤆</a>
@@ -21,7 +21,7 @@
             <a href="#" id="settings-btn">Settings</a>
             <a href="#" id="log-out-btn">Log Out</a>
         </div>
-        <div class="col-lg-8 col-md-8" style="text-align: center;"> <br />
+        <div class="col-lg-8 col-md-8" style="text-align: center; "> <br />
             <div class="side-navs" id="dashboard">{{> home }}</div>
             <div class="side-navs" id="explore">{{> explore }}</div>
             <div class="side-navs" id="messages">{{> messages }}</div>
