@@ -5,7 +5,7 @@
 </nav>
 <br />
 
-<form action="/api/auth/post" method="POST" style="text-align: left;">
+<form style="text-align: left;">
     <div type="text" id="userid" name="userID" style="display: none;">{{userData.userID}}</div>
     <div id="textarea" contentEditable="true" class="bg-transparent" name="content" maxlength="400" spellcheck="false"></div>
     <small>Maximum 400 characters!</small> <br />
@@ -28,7 +28,7 @@
     <button type="button" class="btn btn-outline-primary underlineText" value="Underline" title="Underline" >
         <i class="fas fa-underline"></i>
     </button>
-    <button type="submit" class="btn btn-outline-success" id="submit-post" title="Submit" >
+    <button type="button" class="btn btn-outline-success" id="submit-post" title="Submit" >
         <i class="fas fa-check-double"></i> POST
     </button>
     {{#if feedbackPost}}

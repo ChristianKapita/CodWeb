@@ -18,100 +18,17 @@
 </nav>
 <br />
 
-{{!-- Examples --}}
+ {{#each dataPost}}
 <div class="block">
     {{!-- User's profile picture --}}
     <img src="/public/imgs/google.png" alt="img" class="mr-3 mt-3 rounded-circle">
     {{!-- User's name --}}
-    <h2>Big Google 
-        <a href="#" class="username">@TheRealGoogle</a>
+    <h2>{{dataPost.firstName}}
+        <a href="#" class="username">{{dataPost.username}}</a>
     </h2>
     {{!-- User's post --}}
-    <p>Lcing elilor sit amorem ipsumsit doecteturet, cons adipi.</p>
+    <p>{{dataPost.content}}</p>
     {{!-- Created at --}}
-    <small><i>Posted on March 06, 2021</i></small>
+    <small><i>{{dataPost.createdAt}}</i></small>
 </div>
-{{!-- End --}}
-<div class="block">
-    <img src="/public/imgs/facebook.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    <h2>The Face Book
-        <a href="#" class="username">@fffacebook</a>
-    </h2>
-    <p>Lr sit amorem ipsum doloet, con adipissecteturicing elit.</p>
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-<div class="block">
-    <img src="/public/imgs/coding.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    <h2>Username
-        <a href="#" class="username">@username</a>
-    </h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-
-
-
-
-
-
-{{!--vv DELETE THIS vv--}}
-{{!-- Examples --}}
-<div class="block">
-    {{!-- User's profile picture --}}
-    <img src="/public/imgs/google.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    {{!-- User's name --}}
-    <h2>Big Google 
-        <a href="#" class="username">@TheRealGoogle</a>
-    </h2>
-    {{!-- User's post --}}
-    <p>Lcing elilor sit amorem ipsumsit doecteturet, cons adipi.</p>
-    {{!-- Created at --}}
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-{{!-- End --}}
-<div class="block">
-    <img src="/public/imgs/facebook.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    <h2>The Face Book
-        <a href="#" class="username">@fffacebook</a>
-    </h2>
-    <p>Lr sit amorem ipsum doloet, con adipissecteturicing elit.</p>
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-<div class="block">
-    <img src="/public/imgs/coding.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    <h2>Username
-        <a href="#" class="username">@username</a>
-    </h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-{{!-- Examples --}}
-<div class="block">
-    {{!-- User's profile picture --}}
-    <img src="/public/imgs/google.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    {{!-- User's name --}}
-    <h2>Big Google 
-        <a href="#" class="username">@TheRealGoogle</a>
-    </h2>
-    {{!-- User's post --}}
-    <p>Lcing elilor sit amorem ipsumsit doecteturet, cons adipi.</p>
-    {{!-- Created at --}}
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-{{!-- End --}}
-<div class="block">
-    <img src="/public/imgs/facebook.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    <h2>The Face Book
-        <a href="#" class="username">@fffacebook</a>
-    </h2>
-    <p>Lr sit amorem ipsum doloet, con adipissecteturicing elit.</p>
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
-<div class="block">
-    <img src="/public/imgs/coding.png" alt="img" class="mr-3 mt-3 rounded-circle">
-    <h2>Username
-        <a href="#" class="username">@username</a>
-    </h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    <small><i>Posted on March 06, 2021</i></small>
-</div>
+ {{/each}} 

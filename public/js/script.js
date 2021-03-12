@@ -271,3 +271,26 @@ $(() => {
     });
   }
 });
+
+$("#submit-post").click((event) => {
+  event.preventDefault();
+  const test1=$("#textarea").text();
+  const test2=$("#userid").text();
+  // alert(test2 + " " + test1);
+  const newPost={
+    UserId: test2,
+    content: test1
+  };
+
+  $.post("/api/posts",newPost, () => {
+    location.href="/dashboard";
+    
+    console.log("testing");
+  });
+});
+
+$("#change-password-submit").click((event)=>{
+  event.preventDefault();
+  const oldPWD = $("#old-password").val().trim();
+  alert(oldPWD);
+})
