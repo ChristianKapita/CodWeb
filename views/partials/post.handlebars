@@ -5,27 +5,33 @@
 </nav>
 <br />
 
-{{!-- <form action="/api/auth/post" method="POST" style="text-align: left;"> --}}
-<form style="text-align: left;">
-    <div type="text" id="userid" name="userID">{{userData.userID}}</div>
-    <div id="textarea" contentEditable="true" class="bg-transparent" name="content" max="400">This is test</div>
+<form action="/api/auth/post" method="POST" style="text-align: left;">
+    <div type="text" id="userid" name="userID" style="display: none;">{{userData.userID}}</div>
+    <div id="textarea" contentEditable="true" class="bg-transparent" name="content" maxlength="400" spellcheck="false"></div>
     <small>Maximum 400 characters!</small> <br />
-    <button id="imgbtn" type="button" class="btn btn-outline-primary">
-        <i class="fas fa-images"></i>
+    <button type="button" class="btn btn-outline-danger" id="cleartext" title="Clear All" >
+        <i class="fas fa-trash"></i>
     </button>
-    <button type="button" class="btn btn-outline-primary boldText" value="Bold">
+    {{!-- <button type="button" class="btn btn-outline-primary">
+        <i class="fas fa-images"></i>
+    </button> --}}
+    <button type="button" class="btn btn-outline-primary" id="spell-check" title="Spell Check" >
+        <i id="eye" class="far fa-eye"></i> 
+        <i id="eye-slash" class="far fa-eye-slash"></i>
+    </button>
+    <button type="button" class="btn btn-outline-primary boldText" value="Bold" title="Bold" >
         <i class="fas fa-bold"></i>
     </button>
-    <button type="button" class="btn btn-outline-primary italicText" value="Italic">
+    <button type="button" class="btn btn-outline-primary italicText" value="Italic" title="Italic" >
         <i class="fas fa-italic"></i>
     </button>
-    <button type="button" class="btn btn-outline-primary underlineText" value="Underline">
+    <button type="button" class="btn btn-outline-primary underlineText" value="Underline" title="Underline" >
         <i class="fas fa-underline"></i>
     </button>
-    <button type="button" id="post" class="btn btn-outline-success" id="submit-post">
+    <button type="submit" class="btn btn-outline-success" id="submit-post" title="Submit" >
         <i class="fas fa-check-double"></i> POST
     </button>
     {{#if feedbackPost}}
-                <h6 class="alert alert-success mt-4">{{feedbackPost}}</h6>
-                {{/if}}
+    <h6 class="alert alert-success mt-4">{{feedbackPost}}</h6>
+    {{/if}}
 </form>

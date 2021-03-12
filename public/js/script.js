@@ -1,20 +1,21 @@
 /* eslint-disable prettier/prettier */
+// Document ready function jQuery
 $(() => {
-  // Adds country list from json file to dropdown menu in sign-up
+  // Adds country list from json file to dropdown menu
   let countryOptions;
   $.getJSON("/public/js/countries.json", result => {
     $.each(result, (i, country) => {
-      //<option value="countrycode">contryname</option>
-      countryOptions += "<option value='" + country.code + "'>" + country.name + "</option>";
+      //HTML syntax: <option value="countryname">contryname</option>
+      countryOptions += "<option value='" + country.name + "'>" + country.name + "</option>";
     });
     $("#country").html(countryOptions);
   });
 
-  // Submit login
+  // Submit login to dashboard
   $("#log-out-btn").click(() => {
     location.href = "/";
   });
-  // Go to sign-up
+  // Go to sign-up page
   $("#sign-up").click(() => {
     location.href = "/sign-up";
   });
@@ -37,6 +38,10 @@ $(() => {
   $("#dashboard").show();
   $("#change-password-form").hide();
   $("#delete-account-form").hide();
+  $("#edit-profile-form").hide();
+  $("#profile-picture-url").hide();
+  $("#change-picture-button").hide();
+  $("#change-picture").hide();
   // Hide all and only show user selection
   // 250 timer for smooth animation
   $("#home-btn").click(() => {
@@ -48,7 +53,6 @@ $(() => {
     $(".side-navs").hide(250);
     $("#explore").show(250);
     $("#mySidenav").css("width", "0px");
-    // $("#results").hide();
   });
   $("#messages-btn").click(() => {
     $(".side-navs").hide(250);
@@ -70,19 +74,56 @@ $(() => {
     $("#settings").show(250);
     $("#mySidenav").css("width", "0px");
   });
-  // Bold, Italic, Underline text
+  // Bold, Italic, Underline , Clear
+  $("#cleartext").click(() => {
+    $("#textarea").html("");
+  });
   $(".boldText").click(() => {
-    $("#textarea").toggleClass("bold");
+    document.execCommand("bold");
   });
   $(".italicText").click(() => {
-    $("#textarea").toggleClass("italic");
+    document.execCommand("italic");
   });
   $(".underlineText").click(() => {
-    $("#textarea").toggleClass("underline");
+    document.execCommand("underline");
   });
-  $("#textarea").on("keypress paste", function (e) {
-    if (this.innerHTML.length >= this.getAttribute("max")) {
-      e.preventDefault();
+  // Spell Check button
+  $("#eye").hide();
+  $("#spell-check").click(() => {
+    switch ($("#textarea").attr("spellcheck")) {
+    case "true":
+      $("#textarea").removeAttr("spellcheck", "true");
+      $("#eye").hide();
+      $("#eye-slash").show();
+      console.log("hey");
+      $("#textarea").attr("spellcheck", "false");
+      break;
+    case "false":
+      $("#textarea").removeAttr("spellcheck", "false");
+      $("#eye").show();
+      $("#eye-slash").hide();
+      console.log("oh hey");
+      $("#textarea").attr("spellcheck", "true");
+      break;
+    }
+  });
+  $("div[contenteditable='true'][maxlength]").on("keyup paste", function (event) {
+    const cntMaxLength = parseInt($(this).attr("maxlength"));
+
+    if ($(this).text().length >= cntMaxLength && event.keyCode !== 8 &&
+      event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 &&
+      event.keyCode !== 40) {
+
+      event.preventDefault();
+
+      $(this).html((i, currentHtml) => {
+        return currentHtml.substring(0, cntMaxLength - 1);
+      });
+    }
+  });
+  // Input field no spaces
+  $(".nospace").keydown((e) => {
+    if (e.keyCode === 32) {
       return false;
     }
   });
@@ -138,18 +179,37 @@ $(() => {
   $("#close-delete-btn").click(() => {
     $("#delete-account-form").hide(250);
   });
+  // Edit Profile
+  $("#edit-profile").click(() => {
+    $("#user-data").hide(250);
+    $("#edit-profile-form").show(250);
+    $("#change-picture").show(250);
+    $("#edit-profile").hide(250);
+  });
+  $("#close-edit-profile").click(() => {
+    $("#user-data").show(250);
+    $("#edit-profile-form").hide(250);
+    $("#change-picture").hide(250);
+    $("#profile-picture-url").hide(250);
+    $("#change-picture-button").hide(250);
+    $("#edit-profile").show(250);
+  });
+  // Change Profile Picture
+  $("#change-picture").click(() => {
+    $("#profile-picture-url").show(250);
+    $("#change-picture-button").show(250);
+  });
   // Random quotes API
   $.getJSON("https://api.quotable.io/random", (data) => {
     $("#apiquotes").html(
       `"${data.content}" <br />
-      —${data.author} `);
+      — ${data.author} `);
   });
   // Explore repositories API
   $("#explore-api-button").click((e) => {
     e.preventDefault();
     exploreAPI();
   });
-
   function exploreAPI() {
     // Set required API queries 
     $("#results").html("");
@@ -173,7 +233,7 @@ $(() => {
         $("#results").append(apierror);
       }
       $("#results").append("<br />");
-      // For Loop to display data
+      // For Loop to display repositories data
       $.each(data.items, (i) => {
         const apiusername = data.items[i].owner.login;
         const apirepository = data.items[i].name;
@@ -200,7 +260,7 @@ $(() => {
         $("#results").append(apiblock);
       });
     }).catch((error) => {
-      // Show error message if anything goes wrong
+      // Show error message if anything else goes wrong
       if (error) {
         const apierror = $("<h5>");
         apierror.addClass("alert");

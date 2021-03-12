@@ -1,7 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.User;
-const Post = db.Post;
+//const Post = db.Post;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -74,22 +74,22 @@ exports.signin = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-exports.post = (req, res) => {
-  // if (!req.body.content) {
-  //   return res.status(404).send("Please add content for post!!!!");
-  // }
-  Post.create({
-    content: req.text.content,
-    UserId: req.text.userId
-    //Post.create(req.body)
-  })
-    .then(() => {
-      // res.render("post.handlebars", {
-      //   feedbackPost: "Successfully Posted."
-      // });
-      res.send({ message: "Successfully Posted" });
-    })
-    .catch(err => {
-      res.status(500).send({ message: err.message });
-    });
-};
+// exports.post = (req, res) => {
+//   // if (!req.body.content) {
+//   //   return res.status(404).send("Please add content for post!!!!");
+//   // }
+//   Post.create({
+//     content: req.text.content,
+//     UserId: req.text.userId
+//     //Post.create(req.body)
+//   })
+//     .then(() => {
+//       // res.render("post.handlebars", {
+//       //   feedbackPost: "Successfully Posted."
+//       // });
+//       res.send({ message: "Successfully Posted" });
+//     })
+//     .catch(err => {
+//       res.status(500).send({ message: err.message });
+//     });
+// };

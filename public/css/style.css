@@ -18,24 +18,6 @@ html, body {
 #coding-image {
     width: 75%;
 }
-#facebook {
-    background-image: url("/public/imgs/facebook.png");
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-    margin-top: 5px;
-    background-position: center;
-    display: inline-block;
-}
-#google {
-    background-image: url("/public/imgs/google.png");
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-    margin-top: 5px;
-    background-position: center;
-    display: inline-block;
-}
 .btn-outline-info {
     width: 80%;
     text-align: center;
@@ -55,7 +37,7 @@ html, body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-  }
+}
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -83,24 +65,24 @@ html, body {
     border-style: solid;
     border-width: medium;
     border-radius: 5px;
-  }
-  .block img {
+}
+.block img {
     width: 75px;
     height: 75px;
     float: left;
     margin: 0 1rem 0 0;
-  }
-  .block h2 {
+}
+.block h2 {
     font-weight: 500;
     margin: 0 0 0.5rem 0;
-  }
-  .close-btn {
+}
+.close-btn {
     cursor: pointer;
     font-size: 72px;
-  }
-  .username {
-      font-size: large;
-  }
+}
+.username {
+    font-size: large;
+}
 code {
     background-color: #eee;
     border-radius: 3px;
@@ -109,7 +91,6 @@ code {
 }
 textarea {
     width: 100%;
-    height: 150px;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -117,7 +98,7 @@ textarea {
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
-  }
+}
 .profile-picture {
     width: 75px;
     height: 75px;
@@ -125,34 +106,33 @@ textarea {
 }
 #textarea {
     width: 100%;
-    height: 20vh;
+    height: 30vh;
     padding: 12px 20px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
     overflow: scroll;
 }
 .bold {
     font-weight: bold;
-  }
+}
 .italic {
     font-style: italic;
-  }
+}
 .underline {
    text-decoration: underline;
-  }
+}
 
 #settings-list {
     text-align: left;
 }
-  .list-group .list-group-item{
-      display: inline-block;
-      font-size: 20px;
-      border-color: lightgray;
-  }
+.list-group .list-group-item{
+    display: inline-block;
+    font-size: 20px;
+    border-color: lightgray;
+}
   .custom-switch {
     display: inline-block;
     float: right;
@@ -177,7 +157,6 @@ textarea {
 #search-form {
     float: right;
 }
-
 #txtid{
-display: none;
+    display: none;
 }

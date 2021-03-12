@@ -11,20 +11,26 @@
     <div class="row">
         <div id="mySidenav" class="sidenav" style="user-select: none;">
             <h5 style="text-align: center; color: white">Signed in as </h5>
-            <h4 style="text-align: center; color: white; font-weight: 900" id="username">{{userData.lastName}} {{userData.firstname}}</h4>
-            <a class="close-btn">⤆</a>
-            <a href="#" id="home-btn">Home</a>
-            <a href="#" id="explore-btn">Explore</a>
-            <a href="#" id="messages-btn">Messages</a>
-            <a href="#" id="post-btn">Post</a>
-            <a href="#" id="profile-btn">Profile</a>
-            <a href="#" id="settings-btn">Settings</a>
-            <a href="#" id="log-out-btn">Log Out</a>
+            <h4 style="text-align: center; color: white; font-weight: 900" id="username">{{userData.firstname}}
+                {{userData.lastName}}</h4>
+            <a class="close-btn">
+                <i class="fas fa-times"></i>
+                <a href="#" id="home-btn">
+                    <i class="fas fa-home"></i> Home</a>
+                <a href="#" id="explore-btn">
+                    <i class="fas fa-search-plus"></i> Explore</a>
+                <a href="#" id="post-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Post</a>
+                <a href="#" id="profile-btn">
+                    <i class="far fa-user"></i> Profile</a>
+                <a href="#" id="settings-btn">
+                    <i class="fas fa-cogs"></i> Settings</a>
+                <a href="#" id="log-out-btn">
+                    <i class="fas fa-sign-out-alt"></i> Log Out</a>
         </div>
         <div class="col-lg-8 col-md-8" style="text-align: center; "> <br />
             <div class="side-navs" id="dashboard">{{> home }}</div>
             <div class="side-navs" id="explore">{{> explore }}</div>
-            <div class="side-navs" id="messages">{{> messages }}</div>
             <div class="side-navs" id="post">{{> post }}</div>
             <div class="side-navs" id="profile">{{> profile }}</div>
             <div class="side-navs" id="settings">{{> settings }}</div>
@@ -32,7 +38,7 @@
         <div class="col-lg-4 col-md-4" style="text-align: center;"> <br />
             <img id="coding-image" src="/public/imgs/coding.png"> <br /> <br />
             <span id="apiquotes"></span>
-        </div>
+        </div> <br />
     </div>
 </div>
 <script> document.title = "CodWeb" </script>
