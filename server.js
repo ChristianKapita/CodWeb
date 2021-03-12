@@ -3,6 +3,8 @@ const bodyParse = require("body-parser");
 const cors = require("cors");
 const db = require("./models");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -22,15 +24,26 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(bodyParse.urlencoded({ extended: true }));
+app.use(bodyParse.urlencoded({ extended: false }));
 app.use(bodyParse.json());
 app.use(bodyParse.text());
-
+app.use(cookieParser());
 // app.get("/", (req, res) => {
 //   //res.json({ message: "welcome to CodWeb App" });
 //   res.sendFile(path.join(__dirname, "../public/login.html"));
 // });
-
+app.use(
+  session({
+    cookieName: "session",
+    key: "user_sid",
+    secret: "somerandonstuffs",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 600000
+    }
+  })
+);
 const PORT = process.env.PORT || 8080;
 require("./routes/auth-routes")(app);
 require("./routes/html-routes")(app);

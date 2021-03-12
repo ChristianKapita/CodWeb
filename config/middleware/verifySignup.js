@@ -1,6 +1,5 @@
 const db = require("../../models");
 const User = db.User;
-
 checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   User.findOne({
@@ -34,9 +33,17 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     });
   });
 };
+sessionChecker = (req, res, next) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.redirect("/dashboard");
+  } else {
+    next();
+  }
+};
 
 const verifySignUp = {
-  checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail
+  checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
+  sessionChecker: sessionChecker
 };
 
 module.exports = verifySignUp;

@@ -271,7 +271,8 @@ $(() => {
     });
   }
 });
-$("#post").click((event) => {
+
+$("#submit-post").click((event) => {
   event.preventDefault();
   const test1=$("#textarea").text();
   const test2=$("#userid").text();
@@ -282,8 +283,14 @@ $("#post").click((event) => {
   };
 
   $.post("/api/posts",newPost, () => {
-    //window.location.href="/partails/home";
-    console.log("Successfully posted");
+    location.href="/dashboard";
+    
+    console.log("testing");
   });
 });
 
+$("#change-password-submit").click((event)=>{
+  event.preventDefault();
+  const oldPWD = $("#old-password").val().trim();
+  alert(oldPWD);
+})

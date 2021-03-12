@@ -5,6 +5,7 @@ const User = db.User;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+//const cookieParser = require("cookie-parser");
 
 exports.signup = (req, res) => {
   // Save User to Database
@@ -56,18 +57,21 @@ exports.signin = (req, res) => {
       const token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
+      req.session.user = user.id;
+      console.log(req.session.user);
       //res.status(200).send(user);
-      res.status(200).render("dashboard", {
-        userData: {
-          firstname: user.firstName,
-          lastName: user.lastName,
-          username: user.username,
-          userID: user.id,
-          country: user.Country,
-          mobile: user.Mobile,
-          email: user.email
-        }
-      });
+      res.redirect("/dashboard");
+      // res.status(200).render("dashboard", {
+      //   userData: {
+      //     firstname: user.firstName,
+      //     lastName: user.lastName,
+      //     username: user.username,
+      //     userID: user.id,
+      //     country: user.Country,
+      //     mobile: user.Mobile,
+      //     email: user.email
+      //   }
+      // });
       console.log(token);
     })
     .catch(err => {
