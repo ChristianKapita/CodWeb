@@ -1,72 +1,79 @@
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4" style="text-align: center;"> <br />
-                <h1 class="title">CodWeb</h1> <br />
-                <img id="coding-image" src="/public/imgs/coding.png">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4" style="text-align: center;"> <br />
+            <h1 class="title">CodWeb</h1> <br />
+            <img id="coding-image" src="/public/imgs/coding.png">
+        </div>
+        <div class="col-lg-8"> <br />
+            <div style="text-align: center;">
+                <h1>Create your CodWeb account</h1> <br />
             </div>
-            <div class="col-lg-8"> <br />
-                <div style="text-align: center;">
-                    <h1>Create your CodWeb Account</h1> <br />
-                </div>
-                <form action="/api/auth/signup" method="POST" class="sign-up">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col form-group">
-                                <h4>First Name: </h4>
-                                <input type="text" class="form-control" id="first-name" name="firstName" placeholder="ex. John">
-                            </div>
-                            <div class="col form-group">
-                                <h4>Last Name: </h4>
-                                <input type="text" class="form-control" id="last-name" name="lastName" placeholder="ex. Smith">
-                            </div>
+            <form action="/api/auth/signup" method="POST" class="sign-up">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col form-group">
+                            <h4>First Name: </h4>
+                            <input type="text" class="form-control" id="first-name" name="firstName"
+                                placeholder="ex. John">
                         </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <h4>Username: </h4>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="ex. JohnSmith1234">
-                                {{#if message}}
-                <h6 class="alert alert-danger mt-4">{{message}}</h6>
-                {{/if}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <h4>Email Address: </h4>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="johnsmith@example.com">
-                                {{#if message}}
-                <h6 class="alert alert-danger mt-4">{{message}}</h6>
-                {{/if}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <h4>Create Password: </h4>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Your Password">
-                            </div>
-                            <div class="col form-group">
-                                <h4>Confirm Password: </h4>
-                                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password">
-                            </div>
-                            <h6>Use 8 or more characters with a mix of letters, numbers and symbols</h6>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <h4>Country: </h4>
-                                <select class="form-control" id="country" name="Country">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                            <div class="col form-group">
-                                <h4>Mobile Number: </h4>
-                                <input type="text" class="form-control" id="mobile" name="Mobile" placeholder="(555)-555-5555">
-                            </div>
+                        <div class="col form-group">
+                            <h4>Last Name: </h4>
+                            <input type="text" class="form-control" id="last-name" name="lastName"
+                                placeholder="ex. Smith">
                         </div>
                     </div>
-                    <h6> Already have an account? <a id="login" href="#">Login</a>!</h6> <br />
-                    <button type="submit" class="btn btn-outline-info" id="sign-up-submit">Next</button>
-                </form>
-                <br />
-            </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <h4>Username: </h4>
+                            <input type="text" class="form-control nospace" id="username" name="username"
+                                placeholder="ex. JohnSmith1234" maxlength="16">
+                            <small>Username can contain a max of 16 characters. </small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <h4>Email Address: </h4>
+                            <input type="email" class="form-control nospace" id="email" name="email"
+                                placeholder="johnsmith@example.com">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <h4>Create Password: </h4>
+                            <input type="password" class="form-control nospace" id="password" name="password"
+                                placeholder="Your Password" maxlength="16" minlength="8">
+                        </div>
+                        <div class="col form-group">
+                            <h4>Confirm Password: </h4>
+                            <input type="password" class="form-control nospace" id="confirm-password"
+                                placeholder="Confirm Password" maxlength="16" minlength="8">
+                        </div>
+                    </div>
+                    <small>
+                        Use 8 - 16 characters with a mix of letters, numbers and symbols. Passwords must match.
+                    </small> <br />
+                    <div class="row">
+                        <div class="col form-group">
+                            <h4>Country: </h4>
+                            <select class="form-control" id="country" name="Country">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col form-group">
+                            <h4>Mobile Number: </h4>
+                            <input type="text" class="form-control nospace" id="mobile" name="Mobile"
+                                placeholder="(555)-555-5555">
+                        </div>
+                    </div>
+                </div>
+                <h6> Already have an account? <a id="login" href="#">Login</a>!</h6> <br />
+                {{#if message}}
+                <h6 class="alert alert-danger mt-4">{{message}}</h6>
+                {{/if}}
+                <button type="submit" class="btn btn-outline-info" id="sign-up-submit">Next</button>
+            </form>
+            <br />
         </div>
     </div>
+</div>
 <script> document.title = "CodWeb Sign Up" </script>

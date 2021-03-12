@@ -65,7 +65,9 @@ exports.signin = (req, res) => {
           userID: user.id,
           country: user.Country,
           mobile: user.Mobile,
-          email: user.email
+          email: user.email,
+          bio: user.bio,
+          defaultImage: user.defaultImage
         }
       });
       console.log(token);

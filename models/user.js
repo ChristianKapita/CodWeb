@@ -39,7 +39,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     Role: {
       type: DataTypes.STRING,
-      defaultValue: "Membre"
+      defaultValue: "Member"
+    },
+    bio: {
+      type: DataTypes.STRING,
+      defaultValue: "Hey there! I am using CodWeb! "
+    },
+    defaultImage: {
+      type: DataTypes.STRING,
+      defaultValue: "/public/imgs/user.png"
     }
   });
   return User;
