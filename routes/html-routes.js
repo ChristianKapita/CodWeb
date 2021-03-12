@@ -16,4 +16,7 @@ module.exports = function(app) {
   app.get("/Post", (req, res) => {
     res.render("partials/post");
   });
+  // app.get("/api/auth/signin", (req, res) => {
+  //   res.redirect("/dashboard");
+  // });
 };

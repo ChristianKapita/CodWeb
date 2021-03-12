@@ -1,23 +1,79 @@
 <div style="text-align: start">
-
     <h1>Your Profile
         <i class="far fa-user"></i>
     </h1>
     <br />
     {{!-- User's profile picture --}}
-    <img src="/public/imgs/google.png" alt="img" class="rounded-circle profile-picture">
+    <img src="{{userData.defaultImage}}" alt="profile-picture" class="rounded-circle profile-picture">
+    <h4 style="display:inline-block"><a href="#" id="change-picture"><i class="far fa-edit"></i></a></h4>
+    <br />
+    {{!-- Edit profile picture URL --}}
+    <div class="input-group">
+        <input class="form-control nospace" type="text" placeholder="Image URL" id="profile-picture-url" />
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="submit" id="change-picture-button">
+                <i class="fas fa-external-link-alt"></i>
+            </button>
+        </div>
+    </div>
+    <br />
+    {{!-- Edit profile button --}}
     <nav class="nav justify-content-end">
-        <button class="btn btn-outline-primary">
+        <button class="btn btn-outline-primary" id="edit-profile">
             Edit Profile
         </button>
     </nav>
-    <h2>{{userData.lastName}} {{userData.firstname}} <a href="#" class="username">{{userData.username}}</a> </h2>
-
-    {{!-- Needs bio and country email phone number info --}}
-    <h6 id="bio">About: Hi I'm google. I do code. Thats all. </h6>
-    <h6 id="location">Location: {{userData.country}}</h6>
-    <h6 id="phone-number">Phone Number: {{userData.mobile}}</h6>
-    <h6 id="email">Email: {{userData.email}}</h6>
+    {{!-- Profile data --}}
+    <div id="user-data">
+        <h2>{{userData.firstname}} {{userData.lastName}} <a href="#" class="username">@{{userData.username}}</a> </h2>
+        <h6><i class="far fa-question-circle"></i> About:
+            <span id="profile-bio">{{userData.bio}}</span>
+        </h6>
+        <h6><i class="fas fa-map-marker-alt"></i> Location:
+            <span id="profile-location">{{userData.country}}</span>
+        </h6>
+        <h6><i class="fas fa-mobile-alt"></i> Phone Number:
+            <span id="profile-phone-number">{{userData.mobile}}</span>
+        </h6>
+        <h6><i class="far fa-envelope"></i> Email:
+            <span id="profile-email">{{userData.email}}</span>
+        </h6>
+    </div>
+    {{!-- This part is hidden until button is clicked --}}
+    <div id="edit-profile-form">
+        <div class="row">
+            <div class="col-lg-6">
+                <h6><i class="fas fa-user-tag"></i> First Name:
+                    <input type="text" class="form-control" id="firstname-edit" placeholder="{{userData.firstname}}">
+                </h6>
+            </div>
+            <div class="col-lg-6">
+                <h6><i class="fas fa-user-tag"></i> Last Name:
+                    <input type="text" class="form-control" id="lastname-edit" placeholder="{{userData.lastName}}">
+                </h6>
+            </div>
+        </div>
+        <h6><i class="fas fa-at"></i> Username:
+            <input type="text" class="form-control nospace" id="username-edit" placeholder="{{userData.username}}">
+        </h6>
+        <h6><i class="far fa-question-circle"></i> About:
+            <input type="text" class="form-control" id="bio-edit" placeholder="{{userData.bio}}">
+        </h6>
+        <h6><i class="fas fa-map-marker-alt"></i> Location:
+            <select class="form-control" id="country" name="Country">
+                <option value=""></option>
+            </select>
+        </h6>
+        <h6><i class="fas fa-mobile-alt"></i> Phone Number:
+            <input type="text" class="form-control nospace" id="phone-number-edit" placeholder="{{userData.mobile}}"
+                maxlength="10">
+        </h6>
+        <h6><i class="far fa-envelope"></i> Email:
+            <input type="email" class="form-control nospace" id="email-edit" placeholder="{{userData.email}}">
+        </h6>
+        <button type="button" class="btn btn-outline-danger" id="close-edit-profile">Cancel</button>
+        <button type="submit" class="btn btn-outline-success" id="edit-profile-submit">Submit</button>
+    </div>
 </div>
 
 <h3>Your Posts</h3>
