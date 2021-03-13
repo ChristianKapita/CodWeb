@@ -46,9 +46,6 @@ module.exports = function(app) {
   //});
 
   app.get("/sign-up", (req, res) => {
-    if (!req.session.user) {
-      res.redirect("/");
-    }
     res.render("sign-up");
   });
   app.get("/post", (req, res) => {

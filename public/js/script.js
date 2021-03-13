@@ -289,8 +289,18 @@ $("#submit-post").click((event) => {
   });
 });
 
-// $("#change-password-submit").click((event)=>{
-//   event.preventDefault();
-//   const oldPWD = $("#old-password").val().trim();
-//   alert(oldPWD);
-// });
+$("#change-password-submit").click((event)=>{
+  event.preventDefault();
+  const oldPassword = $("#old-password").val().trim();
+  const newPassword=$("#password").val().trim();
+  const confirmPassword=$("#confirm-password").val().trim();
+  if(!oldPassword || !newPassword || !confirmPassword){
+    const msg ="Please fill all the fields";
+    $("#msg").text(msg);
+  }
+  else if (newPassword!== confirmPassword)
+  {
+    const msg ="New password and confirm password are not macthing";
+    $("#msg").text(msg);
+  }
+});
