@@ -51,6 +51,7 @@ This application uses the Node Package Manager technologies. The dependencies ar
 ## Links
 Link to live application: ... </br>
 Link to GitHub Repository: https://github.com/GuilleMGN/Group2-Project2/ </br>
+Link to Presentation: https://docs.google.com/presentation/d/1TuWaPgZyG5AgIuyI5rlq5UODwdFRWT8LOeYjkYByHZ8/edit?usp=sharing
 
 ## Contributors
 <h2><a href="https://github.com/GuilleMGN"><img src="https://avatars.githubusercontent.com/u/73862470?s=60&v=4" /> Matthew Guillen</a></h2>
