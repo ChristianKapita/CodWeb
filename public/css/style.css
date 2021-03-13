@@ -160,3 +160,6 @@ textarea {
 #txtid{
     display: none;
 }
+#overflow {
+    overflow: scroll;
+}

@@ -3,7 +3,7 @@ const Post = db.Post;
 const User = db.User;
 
 module.exports = function(app) {
-  app.get("/api/displayPosts", (req, res) => {
+  app.get("/api/profilePosts/:id", (req, res) => {
     Post.findAll({
       include: [
         {
@@ -11,7 +11,9 @@ module.exports = function(app) {
           required: true
         }
       ],
-      order: [["createdAt", "ASC"]]
+      where: {
+        UserId: req.params.id
+      }
     }).then(dbPost => {
       res.json(dbPost);
     });

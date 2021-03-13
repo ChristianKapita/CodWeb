@@ -87,6 +87,7 @@ $(() => {
   $(".underlineText").click(() => {
     document.execCommand("underline");
   });
+
   // Spell Check button
   $("#eye").hide();
   $("#spell-check").click(() => {
@@ -199,6 +200,7 @@ $(() => {
     $("#profile-picture-url").show(250);
     $("#change-picture-button").show(250);
   });
+
   // Random quotes API
   $.getJSON("https://api.quotable.io/random", (data) => {
     $("#apiquotes").html(
@@ -270,23 +272,103 @@ $(() => {
       }
     });
   }
-});
 
-$("#submit-post").click((event) => {
-  event.preventDefault();
-  const test1=$("#textarea").text();
-  const test2=$("#userid").text();
-  // alert(test2 + " " + test1);
-  const newPost={
-    UserId: test2,
-    content: test1
-  };
-
-  $.post("/api/posts",newPost, () => {
-    location.href="/dashboard";
-    
-    console.log("testing");
+  $("#submit-post").click((event) => {
+    event.preventDefault();
+    const test1 = $("#textarea").text();
+    const test2 = $("#userid").text();
+    // alert(test2 + " " + test1);
+    const newPost = {
+      UserId: test2,
+      content: test1
+    };
+    $.post("/api/posts", newPost, () => {
+      location.href = "/dashboard";
+      console.log("testing");
+    });
   });
+  function displayAllPosts() {
+    // Get all posts from json
+    $.ajax({
+      url: "/api/displayPosts",
+      method: "GET"
+    }).then((data) => {
+      // For Loop to display posts data
+      $.each(data, (i) => {
+        const postfirstname = data[i].User.firstName;
+        const postlastname = data[i].User.lastName;
+        const postusername = data[i].User.username;
+        const postcontent = data[i].content;
+        const postprofilepicture = data[i].User.defaultImage;
+        const postcreatedat = data[i].createdAt;
+        // Create HTML blocks for the posts and append to home posts
+        const postblock =
+          `<div class="block" id="#post-block">
+        <img src="${postprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
+        <h2>${postfirstname} ${postlastname} 
+        <a href="#" class="username">@${postusername}</a>
+        </h2>
+        <p id="overflow">${postcontent}</p>
+        <small><i><i class="far fa-clock"></i> Created: ${postcreatedat.split("T").join(" || ")}</i></small>
+        </div>`;
+        $("#all-posts").prepend(postblock);
+      });
+    }).catch((error) => {
+      // Show error message if anything else goes wrong
+      if (error) {
+        const posterror = $("<h5>");
+        posterror.addClass("alert");
+        posterror.addClass("alert-danger");
+        posterror.html("Error! No posts found! ");
+        $("#all-posts").append(posterror);
+      }
+    });
+  }
+  // Invoke function to display all posts on home page upon page load
+  displayAllPosts();
+
+  function profilePosts() {
+    // Get all posts from json
+    const id = $("#userid").text();
+    $.ajax({
+      url: "/api/profilePosts/" + id,
+      method: "GET"
+    }).then((data) => {
+      console.log(data);
+      console.log("Hello from inside");
+      // For Loop to display posts data
+      $.each(data, (i) => {
+        const userpostfirstname = data[i].User.firstName;
+        const userpostlastname = data[i].User.lastName;
+        const userpostusername = data[i].User.username;
+        const userpostcontent = data[i].content;
+        const userpostprofilepicture = data[i].User.defaultImage;
+        const userpostcreatedat = data[i].createdAt;
+        // Create HTML blocks for the posts and append to home posts
+        const userpostblock =
+        `<div class="block" id="#post-block">
+        <img src="${userpostprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
+        <h2>${userpostfirstname} ${userpostlastname} 
+        <a href="#" class="username">@${userpostusername}</a>
+        </h2>
+        <p id="overflow">${userpostcontent}</p>
+        <small><i><i class="far fa-clock"></i> Created: ${userpostcreatedat.split("T").join(" || ")}</i></small>
+        </div>`;
+        $("#profile-posts").prepend(userpostblock);
+      });
+    }).catch((error) => {
+      // Show error message if anything else goes wrong
+      if (error) {
+        const posterror = $("<h5>");
+        posterror.addClass("alert");
+        posterror.addClass("alert-danger");
+        posterror.html("Error! No posts found! ");
+        $("#profile-posts").append(posterror);
+      }
+    });
+  }
+  profilePosts();
+  // End jQuery
 });
 
 // $("#change-password-submit").click((event)=>{
