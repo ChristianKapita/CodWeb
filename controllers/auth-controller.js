@@ -61,39 +61,56 @@ exports.signin = (req, res) => {
       console.log(req.session.user);
       //res.status(200).send(user);
       res.redirect("/dashboard");
-      // res.status(200).render("dashboard", {
-      //   userData: {
-      //     firstname: user.firstName,
-      //     lastName: user.lastName,
-      //     username: user.username,
-      //     userID: user.id,
-      //     country: user.Country,
-      //     mobile: user.Mobile,
-      //     email: user.email
-      //   }
-      // });
       console.log(token);
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
 };
-// exports.post = (req, res) => {
-//   // if (!req.body.content) {
-//   //   return res.status(404).send("Please add content for post!!!!");
-//   // }
-//   Post.create({
-//     content: req.text.content,
-//     UserId: req.text.userId
-//     //Post.create(req.body)
-//   })
-//     .then(() => {
-//       // res.render("post.handlebars", {
-//       //   feedbackPost: "Successfully Posted."
-//       // });
-//       res.send({ message: "Successfully Posted" });
-//     })
-//     .catch(err => {
-//       res.status(500).send({ message: err.message });
-//     });
-// };
+
+exports.changePassword = (req, res) => {
+  if (
+    !req.body.oldPassword ||
+    !req.body.newPassword ||
+    !req.body.confirmPassword
+  ) {
+    return res
+      .status(404)
+      .render("settings", { message: "All the fields are mendatory" });
+  } else if (req.body.ChangePassword !== req.body.confirmPassword) {
+    return res.status(404).render("settings", {
+      message: "New password and confirm password not matching"
+    });
+  }
+  User.findOne({
+    where: {
+      id: req.session.user
+    }
+  }).then(user => {
+    const passwordIsValid = bcrypt.compareSync(
+      req.body.oldPassword,
+      user.password
+    );
+    if (!passwordIsValid) {
+      return res.status(401).render("login", {
+        message: "Old password not correct"
+      });
+    }
+    user
+      .update(
+        {
+          password: passwordIsValid
+        },
+        {
+          where: {
+            id: req.session.user
+          }
+        }
+      )
+      .then(() => {
+        res.render("login", {
+          feedback: "Password changed. Please log in. "
+        });
+      });
+  });
+};

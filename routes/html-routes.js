@@ -6,15 +6,12 @@ const Post = db.Post;
 //for Handlebars
 module.exports = function(app) {
   app.get("/", (req, res) => {
-    // if (req.session.user && req.cookies.user_sid) {
-    //   res.redirect("/dashboard");
-    // } else {
-    //res.redirect("/login");
-    //res.sendFile(path.join(__dirname, "../public/login.html"));
     res.render("login");
-    //}
   });
   app.get("/dashboard", (req, res) => {
+    if (!req.session.user) {
+      res.redirect("/");
+    }
     User.findOne({
       where: {
         id: req.session.user
@@ -28,8 +25,9 @@ module.exports = function(app) {
           }
         ]
       }).then(dbPost => {
-        //res.json(dbPost);
+        //res.json({ dbPost, user });
         res.render("dashboard", {
+          dataPost: dbPost,
           userData: {
             firstname: user.firstName,
             lastName: user.lastName,
@@ -37,18 +35,26 @@ module.exports = function(app) {
             userID: user.id,
             country: user.Country,
             mobile: user.Mobile,
-            email: user.email
-          },
-          dataPost: dbPost
+            email: user.email,
+            bio: user.bio,
+            defaultImage: user.defaultImage
+          }
         });
       });
     });
   });
+  //});
 
   app.get("/sign-up", (req, res) => {
+    if (!req.session.user) {
+      res.redirect("/");
+    }
     res.render("sign-up");
   });
-  app.get("/Post", (req, res) => {
+  app.get("/post", (req, res) => {
+    res.render("partials/post");
+  });
+  app.get("/s", (req, res) => {
     res.render("partials/post");
   });
   // app.get("/api/auth/signin", (req, res) => {
