@@ -49,9 +49,9 @@ This application uses the Node Package Manager technologies. The dependencies ar
 * <a href="https://www.npmjs.com/package/eslint" target="_blank">eslint</a>
 
 ## Links
-Link to live application: ... </br>
-Link to GitHub Repository: https://github.com/GuilleMGN/Group2-Project2/ </br>
-Link to Presentation: https://docs.google.com/presentation/d/1TuWaPgZyG5AgIuyI5rlq5UODwdFRWT8LOeYjkYByHZ8/edit?usp=sharing
+Link to [Live Application](https://group2-project2.herokuapp.com/) </br>
+Link to [GitHub Repository](https://github.com/GuilleMGN/Group2-Project2/) </br>
+Link to [Presentation](https://docs.google.com/presentation/d/1TuWaPgZyG5AgIuyI5rlq5UODwdFRWT8LOeYjkYByHZ8/edit?usp=sharing)
 
 ## Contributors
 <h2><a href="https://github.com/GuilleMGN"><img src="https://avatars.githubusercontent.com/u/73862470?s=60&v=4" /> Matthew Guillen</a></h2>
@@ -65,4 +65,11 @@ Christian's email: kapitachristian2003@gmail.com </br>
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Demo
-...
+#### Login Page
+![login](https://user-images.githubusercontent.com/73862470/111043489-dacad080-8410-11eb-989e-c5864938b782.PNG)
+#### Sign Up Page
+![sign-up](https://user-images.githubusercontent.com/73862470/111043492-def6ee00-8410-11eb-800d-f1d691e30bb0.PNG)
+#### Dashboard Page
+![dashboard](https://user-images.githubusercontent.com/73862470/111043495-e1f1de80-8410-11eb-9457-31a53ba53027.PNG)
+#### Dark Mode
+![explore](https://user-images.githubusercontent.com/73862470/111043497-e3bba200-8410-11eb-97cf-63ddbaf69960.PNG)
