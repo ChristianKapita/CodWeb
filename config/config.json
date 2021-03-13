@@ -1,16 +1,16 @@
 {
   "development": {
-    "username": "hbrhfd8h3kahdb61",
-    "password": "e8i0s6gi9741qw7s",
-    "database": "n619nat9n8vbgwoj",
-    "host": "pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "root",
+    "password": "password",
+    "database": "CodWeb_db",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "hbrhfd8h3kahdb61",
-    "password": "e8i0s6gi9741qw7s",
-    "database": "n619nat9n8vbgwoj",
-    "host": "pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
