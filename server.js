@@ -28,10 +28,7 @@ app.use(bodyParse.urlencoded({ extended: false }));
 app.use(bodyParse.json());
 app.use(bodyParse.text());
 app.use(cookieParser());
-// app.get("/", (req, res) => {
-//   //res.json({ message: "welcome to CodWeb App" });
-//   res.sendFile(path.join(__dirname, "../public/login.html"));
-// });
+
 app.use(
   session({
     cookieName: "session",
@@ -49,6 +46,8 @@ require("./routes/auth-routes")(app);
 require("./routes/html-routes")(app);
 require("./routes/post-routes")(app);
 require("./routes/DisplayPost-routes")(app);
+require("./routes/profile-posts")(app);
+
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
