@@ -289,8 +289,8 @@ $("#submit-post").click((event) => {
   });
 });
 
-$("#change-password-submit").click((event)=>{
-  event.preventDefault();
-  const oldPWD = $("#old-password").val().trim();
-  alert(oldPWD);
-})
+// $("#change-password-submit").click((event)=>{
+//   event.preventDefault();
+//   const oldPWD = $("#old-password").val().trim();
+//   alert(oldPWD);
+// });

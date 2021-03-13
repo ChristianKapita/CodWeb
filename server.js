@@ -48,6 +48,7 @@ const PORT = process.env.PORT || 8080;
 require("./routes/auth-routes")(app);
 require("./routes/html-routes")(app);
 require("./routes/post-routes")(app);
+require("./routes/DisplayPost-routes")(app);
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
