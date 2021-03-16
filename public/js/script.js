@@ -34,6 +34,7 @@ $(() => {
 
   // Hide/Show sections based on user nav selection in dashboard
   // Hide all and only show dashboard upon page load
+  $("#msg").hide();
   $(".side-navs").hide();
   $("#dashboard").show();
   $("#change-password-form").hide();
@@ -87,7 +88,6 @@ $(() => {
   $(".underlineText").click(() => {
     document.execCommand("underline");
   });
-
   // Spell Check button
   $("#eye").hide();
   $("#spell-check").click(() => {
@@ -200,7 +200,6 @@ $(() => {
     $("#profile-picture-url").show(250);
     $("#change-picture-button").show(250);
   });
-
   // Random quotes API
   $.getJSON("https://api.quotable.io/random", (data) => {
     $("#apiquotes").html(
@@ -272,125 +271,70 @@ $(() => {
       }
     });
   }
-
-  $("#submit-post").click((event) => {
-    event.preventDefault();
-    const test1 = $("#textarea").text();
-    const test2 = $("#userid").text();
-    // alert(test2 + " " + test1);
-    const newPost = {
-      UserId: test2,
-      content: test1
-    };
-    $.post("/api/posts", newPost, () => {
-      location.href = "/dashboard";
-      console.log("testing");
-    });
-  });
-  function displayAllPosts() {
-    // Get all posts from json
-    $.ajax({
-      url: "/api/displayPosts",
-      method: "GET"
-    }).then((data) => {
-      // For Loop to display posts data
-      $.each(data, (i) => {
-        const postfirstname = data[i].User.firstName;
-        const postlastname = data[i].User.lastName;
-        const postusername = data[i].User.username;
-        const postcontent = data[i].content;
-        const postprofilepicture = data[i].User.defaultImage;
-        const postcreatedat = data[i].createdAt;
-        // Create HTML blocks for the posts and append to home posts
-        const postblock =
-          `<div class="block" id="#post-block">
-        <img src="${postprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
-        <h2>${postfirstname} ${postlastname} 
-        <a href="#" class="username">@${postusername}</a>
-        </h2>
-        <p id="overflow">${postcontent}</p>
-        <small><i><i class="far fa-clock"></i> Created: ${postcreatedat.split("T").join(" || ")}</i></small>
-        </div>`;
-        $("#all-posts").prepend(postblock);
-      });
-    }).catch((error) => {
-      // Show error message if anything else goes wrong
-      if (error) {
-        const posterror = $("<h5>");
-        posterror.addClass("alert");
-        posterror.addClass("alert-danger");
-        posterror.html("Error! No posts found! ");
-        $("#all-posts").append(posterror);
-      }
-    });
-  }
-  // Invoke function to display all posts on home page upon page load
-  displayAllPosts();
-
-  function profilePosts() {
-    // Get all posts from json
-    const id = $("#userid").text();
-    $.ajax({
-      url: "/api/profilePosts/" + id,
-      method: "GET"
-    }).then((data) => {
-      console.log(data);
-      console.log("Hello from inside");
-      // For Loop to display posts data
-      $.each(data, (i) => {
-        const userpostfirstname = data[i].User.firstName;
-        const userpostlastname = data[i].User.lastName;
-        const userpostusername = data[i].User.username;
-        const userpostcontent = data[i].content;
-        const userpostprofilepicture = data[i].User.defaultImage;
-        const userpostcreatedat = data[i].createdAt;
-        // Create HTML blocks for the posts and append to home posts
-        const userpostblock =
-        `<div class="block" id="#post-block">
-        <img src="${userpostprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
-        <h2>${userpostfirstname} ${userpostlastname} 
-        <a href="#" class="username">@${userpostusername}</a>
-        </h2>
-        <p id="overflow">${userpostcontent}</p>
-        <small><i><i class="far fa-clock"></i> Created: ${userpostcreatedat.split("T").join(" || ")}</i></small>
-        </div>`;
-        $("#profile-posts").prepend(userpostblock);
-      });
-    }).catch((error) => {
-      // Show error message if anything else goes wrong
-      if (error) {
-        const posterror = $("<h5>");
-        posterror.addClass("alert");
-        posterror.addClass("alert-danger");
-        posterror.html("Error! No posts found! ");
-        $("#profile-posts").append(posterror);
-      }
-    });
-  }
-  profilePosts();
-  // End jQuery
 });
 
-<<<<<<< HEAD
+$("#submit-post").click((event) => {
+  event.preventDefault();
+  const test1=$("#textarea").text();
+  const test2=$("#userid").text();
+  // alert(test2 + " " + test1);
+  const newPost={
+    UserId: test2,
+    content: test1
+  };
+
+  $.post("/api/posts",newPost, () => {
+    location.href="/dashboard";
+    
+    console.log("testing");
+  });
+});
+
 $("#change-password-submit").click((event)=>{
   event.preventDefault();
-  const oldPassword = $("#old-password").val().trim();
+  const userid=$("#userid").text();
+  //const oldPassword = $("#old-password").val().trim();
   const newPassword=$("#password").val().trim();
   const confirmPassword=$("#confirm-password").val().trim();
-  if(!oldPassword || !newPassword || !confirmPassword){
+  const passwordChanged={password: newPassword};
+  if(!newPassword || !confirmPassword){
     const msg ="Please fill all the fields";
     $("#msg").text(msg);
+    $("#msg").show();
+    $("#password").val("");
+    $("#confirm-password").val("");
   }
   else if (newPassword!== confirmPassword)
   {
     const msg ="New password and confirm password are not macthing";
     $("#msg").text(msg);
+    $("#msg").show();
+    $("#password").val("");
+    $("#confirm-password").val("");
+   
+  }
+  else {
+    changePassword(userid,passwordChanged );
   }
 });
-=======
-// $("#change-password-submit").click((event)=>{
-//   event.preventDefault();
-//   const oldPWD = $("#old-password").val().trim();
-//   alert(oldPWD);
-// });
->>>>>>> origin
+
+
+function changePassword(id,password) {
+  $.ajax({
+    method: "PUT",
+    url: "/api/changePassword/" + id,
+    data: password
+  })
+    .then(() => {
+      const msg ="Password changed successfully. You will be redirected to the login page";
+      $("#msg").text(msg);
+      $("#msg").removeClass("alert-danger");
+      $("#msg").addClass("alert-success");
+      $("#msg").show();
+      console.log("changed password");
+      setTimeout(() => {
+        window.location.href = "/";
+      },3000);
+    });
+  console.log("testing", id);
+}
