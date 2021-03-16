@@ -76,17 +76,19 @@ $(() => {
     $("#mySidenav").css("width", "0px");
   });
   // Bold, Italic, Underline , Clear
-  $("#cleartext").click(() => {
-    $("#textarea").html("");
-  });
   $(".boldText").click(() => {
     document.execCommand("bold");
+    $("<b>").append("#textarea");
   });
   $(".italicText").click(() => {
     document.execCommand("italic");
   });
   $(".underlineText").click(() => {
     document.execCommand("underline");
+  });
+
+  $("#cleartext").click(() => {
+    $("#textarea").html("");
   });
   // Spell Check button
   $("#eye").hide();
@@ -108,6 +110,7 @@ $(() => {
       break;
     }
   });
+  // Post maxcontent properties
   $("div[contenteditable='true'][maxlength]").on("keyup paste", function (event) {
     const cntMaxLength = parseInt($(this).attr("maxlength"));
 
@@ -273,20 +276,18 @@ $(() => {
   }
 });
 
-$("#submit-post").click((event) => {
-  event.preventDefault();
-  const test1=$("#textarea").text();
-  const test2=$("#userid").text();
-  // alert(test2 + " " + test1);
-  const newPost={
-    UserId: test2,
-    content: test1
-  };
 
-  $.post("/api/posts",newPost, () => {
-    location.href="/dashboard";
-    
-    console.log("testing");
+  $("#submit-post").click((event) => {
+    event.preventDefault();
+    const test1 = $("#textarea").text();
+    const test2 = $("#userid").text();
+    const newPost = {
+      UserId: test2,
+      content: test1
+    };
+    $.post("/api/posts", newPost, () => {
+      location.href = "/dashboard";
+    });
   });
 });
 
