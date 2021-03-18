@@ -27,12 +27,13 @@
     </ul>
 </div>
 <br />
-<form action="/api/changePassword" method="PUT" >
+{{!-- <form action="/api/changePassword" method="PUT" > --}}
 <div class="row" id="change-password-form">
     <div class="col-lg-12 form-group">
-        <h4>Old Password: </h4>
-        <input type="password" class="form-control nospace" id="old-password" name="oldPassword" placeholder="Old Password">
-        <small>Remember: Use 8 - 16 characters with a mix of letters, numbers and symbols</small>
+        {{!-- <h4>Old Password: </h4> --}}
+        {{!-- <input type="password" class="form-control nospace" id="old-password" name="oldPassword" placeholder="Old Password"> --}}
+         <h6 id="msg" class="alert alert-danger mt-4 form-control nospace"></h6>
+        {{!-- <small>Remember: Use 8 - 16 characters with a mix of letters, numbers and symbols</small> --}}
     </div>
     <br />
     <div class="col-lg-6 form-group">
@@ -46,13 +47,11 @@
      <br />
     <div>
         <button type="button" class="btn btn-outline-danger" id="close-password-btn">Cancel</button>
-        <button type="submit" class="btn btn-outline-success" id="change-password-submit">Submit</button>
+        <button type="button" class="btn btn-outline-success" id="change-password-submit">Submit</button>
     </div>
-    {{#if message}}
-                <h6 class="alert alert-danger mt-4">{{message}}</h6>
-                {{/if}}
+               
 </div>
-</form>
+{{!-- </form> --}}
 <div class="row" id="delete-account-form">
     <div class="col-lg-12 form-group">
         <h4>Confirm Password: </h4>

@@ -47,6 +47,7 @@ require("./routes/html-routes")(app);
 require("./routes/post-routes")(app);
 require("./routes/DisplayPost-routes")(app);
 require("./routes/profile-posts")(app);
+require("./routes/changePassword-routes.js")(app);
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => {
