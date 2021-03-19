@@ -1,3 +1,3 @@
---Create database
-drop database if exists codweb_db;
-CREATE database codweb_d;
+--Create Database
+DROP DATABASE IF EXISTS codweb_db;
+CREATE DATABASE codweb_db;

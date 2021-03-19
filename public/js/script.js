@@ -126,9 +126,19 @@ $(() => {
     }
   });
   // Input field no spaces
-  $(".nospace").keydown((e) => {
-    if (e.keyCode === 32) {
-      return false;
+  // "Ban" spaces in username field
+  $("input.nospace").on({
+
+    // When a new character was typed in
+    keydown: function (e) {
+      // 32 - ASCII for Space;
+      // `return false` cancels the keypress
+      if (e.which === 32) { return false; }
+    },
+    // When spaces managed to "sneak in" via copy/paste
+    change: function () {
+      // Regex-remove all spaces in the final value
+      this.value = this.value.replace(/\s/g, "");
     }
   });
   // Theme Switcher
@@ -214,6 +224,7 @@ $(() => {
     e.preventDefault();
     exploreAPI();
   });
+
   function exploreAPI() {
     // Set required API queries 
     $("#results").html("");
@@ -274,8 +285,6 @@ $(() => {
       }
     });
   }
-});
-
 
   $("#submit-post").click((event) => {
     event.preventDefault();
@@ -289,45 +298,83 @@ $(() => {
       location.href = "/dashboard";
     });
   });
-});
 
-$("#change-password-submit").click((event)=>{
-  event.preventDefault();
-  const userid=$("#userid").text();
-  //const oldPassword = $("#old-password").val().trim();
-  const newPassword=$("#password").val().trim();
-  const confirmPassword=$("#confirm-password").val().trim();
-  const passwordChanged={password: newPassword};
-  if(!newPassword || !confirmPassword){
-    const msg ="Please fill all the fields";
-    $("#msg").text(msg);
-    $("#msg").show();
-    $("#password").val("");
-    $("#confirm-password").val("");
+  function profilePosts() {
+    // Get all posts from json
+    const id = $("#userid").text();
+    $.ajax({
+      url: "/api/profilePosts/" + id,
+      method: "GET"
+    }).then((data) => {
+      console.log(data);
+      // For Loop to display posts data
+      $.each(data, (i) => {
+        const userpostfirstname = data[i].User.firstName;
+        const userpostlastname = data[i].User.lastName;
+        const userpostusername = data[i].User.username;
+        const userpostcontent = data[i].content;
+        const userpostprofilepicture = data[i].User.defaultImage;
+        const userpostcreatedat = data[i].createdAt;
+        // Create HTML blocks for the posts and append to home posts
+        const userpostblock =
+          `<div class="block" id="#post-block">
+        <img src="${userpostprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
+        <h2>${userpostfirstname} ${userpostlastname} 
+        <a href="#" class="username">@${userpostusername}</a>
+        </h2>
+        <p id="overflow">${userpostcontent}</p>
+        <small><i><i class="far fa-clock"></i> Created: ${userpostcreatedat.split("T").join(" || ")}</i></small>
+        </div>`;
+        $("#profile-posts").prepend(userpostblock);
+      });
+    }).catch((error) => {
+      // Show error message if anything else goes wrong
+      if (error) {
+        const posterror = $("<h5>");
+        posterror.addClass("alert");
+        posterror.addClass("alert-danger");
+        posterror.html("Error! No posts found! ");
+        $("#profile-posts").append(posterror);
+      }
+    });
   }
-  else if (newPassword!== confirmPassword)
-  {
-    const msg ="New password and confirm password are not macthing";
-    $("#msg").text(msg);
-    $("#msg").show();
-    $("#password").val("");
-    $("#confirm-password").val("");
-   
-  }
-  else {
-    changePassword(userid,passwordChanged );
-  }
-});
 
+  profilePosts();
 
-function changePassword(id,password) {
-  $.ajax({
-    method: "PUT",
-    url: "/api/changePassword/" + id,
-    data: password
-  })
-    .then(() => {
-      const msg ="Password changed successfully. You will be redirected to the login page";
+  $("#change-password-submit").click((event) => {
+    event.preventDefault();
+    const userid = $("#userid").text();
+    //const oldPassword = $("#old-password").val().trim();
+    const newPassword = $("#password").val().trim();
+    const confirmPassword = $("#confirm-password").val().trim();
+    const passwordChanged = { password: newPassword };
+    if (!newPassword || !confirmPassword) {
+      const msg = "Please fill all the fields";
+      $("#msg").text(msg);
+      $("#msg").show();
+      $("#password").val("");
+      $("#confirm-password").val("");
+    }
+    else if (newPassword !== confirmPassword) {
+      const msg = "New password and confirm password are not macthing";
+      $("#msg").text(msg);
+      $("#msg").show();
+      $("#password").val("");
+      $("#confirm-password").val("");
+
+    }
+    else {
+      changePassword(userid, passwordChanged);
+    }
+  });
+
+  function changePassword(id, password) {
+    $.ajax({
+      method: "PUT",
+      url: "/api/changePassword/" + id,
+      data: password
+    }).then(() => {
+      const msg = "Password changed successfully. You will be redirected to the login page";
       $("#msg").text(msg);
       $("#msg").removeClass("alert-danger");
       $("#msg").addClass("alert-success");
@@ -335,7 +382,47 @@ function changePassword(id,password) {
       console.log("changed password");
       setTimeout(() => {
         window.location.href = "/";
-      },3000);
+      }, 3000);
     });
-  console.log("testing", id);
-}
+    console.log("testing", id);
+  }
+  function displayAllPosts() {
+    // Get all posts from json
+    $.ajax({
+      url: "/api/displayPosts",
+      method: "GET"
+    }).then((data) => {
+      // For Loop to display posts data
+      $.each(data, (i) => {
+        const postfirstname = data[i].User.firstName;
+        const postlastname = data[i].User.lastName;
+        const postusername = data[i].User.username;
+        const postcontent = data[i].content;
+        const postprofilepicture = data[i].User.defaultImage;
+        const postcreatedat = data[i].createdAt;
+        // Create HTML blocks for the posts and append to home posts
+        const postblock =
+          `<div class="block" id="#post-block">
+        <img src="${postprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
+        <h2>${postfirstname} ${postlastname} 
+        <a href="#" class="username">@${postusername}</a>
+        </h2>
+        <p id="overflow">${postcontent}</p>
+        <small><i><i class="far fa-clock"></i> Created: ${postcreatedat.split("T").join(" || ")}</i></small>
+        </div>`;
+        $("#all-posts").prepend(postblock);
+      });
+    }).catch((error) => {
+      // Show error message if anything else goes wrong
+      if (error) {
+        const posterror = $("<h5>");
+        posterror.addClass("alert");
+        posterror.addClass("alert-danger");
+        posterror.html("Error! No posts found! ");
+        $("#all-posts").append(posterror);
+      }
+    });
+  }
+  // Invoke function to display all posts on home page upon page load
+  displayAllPosts();
+});
