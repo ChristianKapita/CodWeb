@@ -124,9 +124,20 @@ $(() => {
     }
   });
   // Input field no spaces
-  $(".nospace").keydown((e) => {
-    if (e.keyCode === 32) {
-      return false;
+  // "Ban" spaces in username field
+  $("input.nospace").on({
+
+    // When a new character was typed in
+    keydown: function (e) {
+      // 32 - ASCII for Space;
+      // `return false` cancels the keypress
+      if (e.which === 32)
+      {return false;}
+    },
+    // When spaces managed to "sneak in" via copy/paste
+    change: function () {
+      // Regex-remove all spaces in the final value
+      this.value = this.value.replace(/\s/g, "");
     }
   });
   // Theme Switcher
@@ -345,7 +356,7 @@ $(() => {
         const userpostcreatedat = data[i].createdAt;
         // Create HTML blocks for the posts and append to home posts
         const userpostblock =
-        `<div class="block" id="#post-block">
+          `<div class="block" id="#post-block">
         <img src="${userpostprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
         <h2>${userpostfirstname} ${userpostlastname} 
         <a href="#" class="username">@${userpostusername}</a>
