@@ -74,43 +74,51 @@ exports.changePassword = (req, res) => {
     !req.body.newPassword ||
     !req.body.confirmPassword
   ) {
-    return res
-      .status(404)
-      .render("settings", { message: "All the fields are mendatory" });
+    // return res
+    //   .status(404)
+    //   .render("settings", { message: "All the fields are mendatory" });
+    return res.send("All Fields");
   } else if (req.body.ChangePassword !== req.body.confirmPassword) {
-    return res.status(404).render("settings", {
-      message: "New password and confirm password not matching"
-    });
+    // return res.status(404).render("settings", {
+    //   message: "New password and confirm password not matching"
+    // });
+    return res.send("incorrect");
   }
   User.findOne({
     where: {
       id: req.session.user
     }
-  }).then(user => {
-    const passwordIsValid = bcrypt.compareSync(
-      req.body.oldPassword,
-      user.password
-    );
-    if (!passwordIsValid) {
-      return res.status(401).render("login", {
-        message: "Old password not correct"
-      });
-    }
-    user
-      .update(
-        {
-          password: passwordIsValid
-        },
-        {
-          where: {
-            id: req.session.user
+  })
+    .then(user => {
+      const passwordIsValid = bcrypt.compareSync(
+        req.body.oldPassword,
+        user.password
+      );
+      if (!passwordIsValid) {
+        // return res.status(401).render("login", {
+        //   message: "Old password not correct"
+        // });
+        return res.send("incorrect");
+      }
+      user
+        .update(
+          {
+            password: passwordIsValid
+          },
+          {
+            where: {
+              id: req.session.user
+            }
           }
-        }
-      )
-      .then(() => {
-        res.render("login", {
-          feedback: "Password changed. Please log in. "
+        )
+        .then(() => {
+          // res.render("login", {
+          //   feedback: "Password changed. Please log in. "
+          // });
+          return res.send("changed");
         });
-      });
-  });
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
 };

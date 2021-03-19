@@ -34,6 +34,7 @@ $(() => {
 
   // Hide/Show sections based on user nav selection in dashboard
   // Hide all and only show dashboard upon page load
+  $("#msg").hide();
   $(".side-navs").hide();
   $("#dashboard").show();
   $("#change-password-form").hide();
@@ -85,6 +86,7 @@ $(() => {
   $(".underlineText").click(() => {
     document.execCommand("underline");
   });
+
   $("#cleartext").click(() => {
     $("#textarea").html("");
   });
@@ -131,8 +133,7 @@ $(() => {
     keydown: function (e) {
       // 32 - ASCII for Space;
       // `return false` cancels the keypress
-      if (e.which === 32)
-      {return false;}
+      if (e.which === 32) { return false; }
     },
     // When spaces managed to "sneak in" via copy/paste
     change: function () {
@@ -212,7 +213,6 @@ $(() => {
     $("#profile-picture-url").show(250);
     $("#change-picture-button").show(250);
   });
-
   // Random quotes API
   $.getJSON("https://api.quotable.io/random", (data) => {
     $("#apiquotes").html(
@@ -224,6 +224,7 @@ $(() => {
     e.preventDefault();
     exploreAPI();
   });
+
   function exploreAPI() {
     // Set required API queries 
     $("#results").html("");
@@ -297,6 +298,94 @@ $(() => {
       location.href = "/dashboard";
     });
   });
+
+  function profilePosts() {
+    // Get all posts from json
+    const id = $("#userid").text();
+    $.ajax({
+      url: "/api/profilePosts/" + id,
+      method: "GET"
+    }).then((data) => {
+      console.log(data);
+      // For Loop to display posts data
+      $.each(data, (i) => {
+        const userpostfirstname = data[i].User.firstName;
+        const userpostlastname = data[i].User.lastName;
+        const userpostusername = data[i].User.username;
+        const userpostcontent = data[i].content;
+        const userpostprofilepicture = data[i].User.defaultImage;
+        const userpostcreatedat = data[i].createdAt;
+        // Create HTML blocks for the posts and append to home posts
+        const userpostblock =
+          `<div class="block" id="#post-block">
+        <img src="${userpostprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
+        <h2>${userpostfirstname} ${userpostlastname} 
+        <a href="#" class="username">@${userpostusername}</a>
+        </h2>
+        <p id="overflow">${userpostcontent}</p>
+        <small><i><i class="far fa-clock"></i> Created: ${userpostcreatedat.split("T").join(" || ")}</i></small>
+        </div>`;
+        $("#profile-posts").prepend(userpostblock);
+      });
+    }).catch((error) => {
+      // Show error message if anything else goes wrong
+      if (error) {
+        const posterror = $("<h5>");
+        posterror.addClass("alert");
+        posterror.addClass("alert-danger");
+        posterror.html("Error! No posts found! ");
+        $("#profile-posts").append(posterror);
+      }
+    });
+  }
+
+  profilePosts();
+
+  $("#change-password-submit").click((event) => {
+    event.preventDefault();
+    const userid = $("#userid").text();
+    //const oldPassword = $("#old-password").val().trim();
+    const newPassword = $("#password").val().trim();
+    const confirmPassword = $("#confirm-password").val().trim();
+    const passwordChanged = { password: newPassword };
+    if (!newPassword || !confirmPassword) {
+      const msg = "Please fill all the fields";
+      $("#msg").text(msg);
+      $("#msg").show();
+      $("#password").val("");
+      $("#confirm-password").val("");
+    }
+    else if (newPassword !== confirmPassword) {
+      const msg = "New password and confirm password are not macthing";
+      $("#msg").text(msg);
+      $("#msg").show();
+      $("#password").val("");
+      $("#confirm-password").val("");
+
+    }
+    else {
+      changePassword(userid, passwordChanged);
+    }
+  });
+
+  function changePassword(id, password) {
+    $.ajax({
+      method: "PUT",
+      url: "/api/changePassword/" + id,
+      data: password
+    }).then(() => {
+      const msg = "Password changed successfully. You will be redirected to the login page";
+      $("#msg").text(msg);
+      $("#msg").removeClass("alert-danger");
+      $("#msg").addClass("alert-success");
+      $("#msg").show();
+      console.log("changed password");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
+    });
+    console.log("testing", id);
+  }
   function displayAllPosts() {
     // Get all posts from json
     $.ajax({
@@ -336,53 +425,4 @@ $(() => {
   }
   // Invoke function to display all posts on home page upon page load
   displayAllPosts();
-
-  function profilePosts() {
-    // Get all posts from json
-    const id = $("#userid").text();
-    $.ajax({
-      url: "/api/profilePosts/" + id,
-      method: "GET"
-    }).then((data) => {
-      console.log(data);
-      console.log("Hello from inside");
-      // For Loop to display posts data
-      $.each(data, (i) => {
-        const userpostfirstname = data[i].User.firstName;
-        const userpostlastname = data[i].User.lastName;
-        const userpostusername = data[i].User.username;
-        const userpostcontent = data[i].content;
-        const userpostprofilepicture = data[i].User.defaultImage;
-        const userpostcreatedat = data[i].createdAt;
-        // Create HTML blocks for the posts and append to home posts
-        const userpostblock =
-          `<div class="block" id="#post-block">
-        <img src="${userpostprofilepicture}" alt="profile-picture" class="mr-3 mt-3 rounded-circle">
-        <h2>${userpostfirstname} ${userpostlastname} 
-        <a href="#" class="username">@${userpostusername}</a>
-        </h2>
-        <p id="overflow">${userpostcontent}</p>
-        <small><i><i class="far fa-clock"></i> Created: ${userpostcreatedat.split("T").join(" || ")}</i></small>
-        </div>`;
-        $("#profile-posts").prepend(userpostblock);
-      });
-    }).catch((error) => {
-      // Show error message if anything else goes wrong
-      if (error) {
-        const posterror = $("<h5>");
-        posterror.addClass("alert");
-        posterror.addClass("alert-danger");
-        posterror.html("Error! No posts found! ");
-        $("#profile-posts").append(posterror);
-      }
-    });
-  }
-  profilePosts();
-  // End jQuery
 });
-
-// $("#change-password-submit").click((event)=>{
-//   event.preventDefault();
-//   const oldPWD = $("#old-password").val().trim();
-//   alert(oldPWD);
-// });
